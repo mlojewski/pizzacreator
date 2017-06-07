@@ -1,2 +1,4 @@
-# pizzacreator
-My final final project for CodersLab PHP bootcamp. A simple app allowing users to create and order a take away pizza. Vegetarian and vegan friendly
+pizzacreator
+============
+
+A Symfony project created on June 7, 2017, 2:23 pm.

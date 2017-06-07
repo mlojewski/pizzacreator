@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Ingredients:showAll{% endblock %}
+
+{% block body %}
+<h1>Lista Składników</h1>
+<ol>
+{%for ingredinet in allIngredients%}
+    <li>{{ingredient.name}} | {{ingredient.text}}
+    <a href ="/update/{{ingredient.id}}">aktualizuj</a>
+    </li>
+{%endfor%}
+</ol>
+{% endblock %}

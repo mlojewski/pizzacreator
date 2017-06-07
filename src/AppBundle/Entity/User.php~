@@ -1,0 +1,77 @@
+<?php
+// src/AppBundle/Entity/User.php
+
+namespace AppBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="surname", type="string", length=255)
+     */
+    private $surname;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="phone", type="integer")
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255)
+     */
+    private $address;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="vegetarian", type="boolean")
+     */
+    private $vegetarian;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="vegan", type="boolean")
+     */
+    private $vegan;
+
+    /**
+    *@ORM\OneToMany(targetEntity = "pizza", mappedBy="creator")
+    */
+
+    private $pizzas;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->pizzas = new ArrayCollection();
+    }
+
+}
