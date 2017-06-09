@@ -1,0 +1,30 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Ingredients:showAll{% endblock %}
+
+{% block body %}
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+
+<h1>Lista Składników</h1>
+<table class="table table-striped">
+<tr>
+<td>nazwa</td> <td>cena</td> <td>waga</td> <td> kaloryczność</td><td>wegański</td><td>wegetariański</td><td></td>
+</tr>
+{%for ingredient in allIngredients%}
+<tr>
+<td>{{ingredient.name}} </td>
+<td> {{ingredient.price}} </td>
+<td> {{ingredient.weight}} </td>
+<td> {{ingredient.calories}} </td>
+<td> {% if ingredient.vegan == 0 %} nie {% else %} tak {%endif%} </td>
+<td> {% if ingredient.vegetarian == 0 %} nie {% else %} tak {%endif%}  </td>
+<td> <a href ="/editproduct/{{ingredient.id}}">aktualizuj</a> </td>
+  </tr>
+
+{%endfor%}
+</table>
+<a href = "/admin">powrót do głównej</a>
+</div>
+{% endblock %}

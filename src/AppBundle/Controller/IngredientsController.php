@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Ingredient;
-
+use AppBundle\Entity\Pizza;
+use AppBundle\Form\IngredientType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class IngredientsController extends Controller
 {
@@ -16,28 +18,37 @@ class IngredientsController extends Controller
     public function AddAction(Request $request)
     {
         $ingredient = new Ingredient();
-        $form = $this->createFormBuilder($ingredient)
-        ->add("name", "text")->add("price", "integer")
-        ->add("weight", "integer")->add("calories", "integer")
-        ->add("vegetarian", "checkbox")->add("vegan", "checkbox")
-        ->add('save', 'submit', array('label' => 'Create Task'))->getForm();
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-          $ingredient = $form ->getData();
+        $form = $this->createForm(IngredientType::class, $ingredient);
+        $form ->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+          $em = $this->getDoctrine()->getManager();
           $em->persist($ingredient);
           $em->flush();
+          $allIngredients = $this->getDoctrine()->getRepository("AppBundle:Ingredient")->findAll();
+          return $this->render('AppBundle:Ingredients:show_all.html.twig', array(
+            'allIngredients' =>$allIngredients ));
         }
-      return $this->redirectToRoute("app_ingredients_showall");
+      return $this->render("AppBundle:Ingredients:add.html.twig", array('form' => $form->createView()));
     }
 
     /**
-     * @Route("/editproduct")
+     * @Route("/editproduct/{id}")
      */
-    public function EditAction()
+    public function EditAction(Request $request, $id)
     {
-        return $this->render('AppBundle:Ingredients:edit.html.twig', array(
-            // ...
-        ));
+          $oneIngredient = $this->getDoctrine()->getRepository("AppBundle:Ingredient")->findOneById($id);
+          $allIngredients = $this->getDoctrine()->getRepository("AppBundle:Ingredient")->findAll();
+          $form = $this->createForm(IngredientType::class, $oneIngredient);
+          $form ->handleRequest($request);
+          if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($oneIngredient);
+            $em->flush();
+            $allIngredients = $this->getDoctrine()->getRepository("AppBundle:Ingredient")->findAll();
+            return $this->render('AppBundle:Ingredients:show_all.html.twig', array(
+              'allIngredients' =>$allIngredients ));
+          }
+          return $this->render("AppBundle:Ingredients:edit.html.twig", array('form' => $form->createView(), 'oneIngredient' => $oneIngredient));
     }
 
     /**

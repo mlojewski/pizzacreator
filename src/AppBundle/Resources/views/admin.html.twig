@@ -1,0 +1,78 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Ingredients:Add{% endblock %}
+
+{% block body %}
+<body>
+
+   <div class="container">
+     <div class="header clearfix">
+
+       <h3 class="text-muted">Admin</h3>
+       <a href = "/logout"><h4>wyloguj się</h4></a>
+     </div>
+
+     <div class="jumbotron">
+       <h1>PizzaComposer</h1>
+       <p class="lead">Witaj na stronie administratora systemu.</p>
+
+     </div>
+
+     <div class="row marketing">
+       <div class="col-lg-6">
+         <h4> ostatnio zarejestrowani uczestnicy</h4>
+         <table class="table table-striped">
+         <tr>
+         <td>nick</td> <td>email</td> <td>telefon</td> <td> adres</td>
+
+         {% for val in allUsers%}
+         <tr>
+         <td> {{val.username}} </td>
+         <td> {{val.email}} </td>
+         <td> {{val.phone}} </td>
+         <td> {{val.address}} </td>
+         </tr>
+
+         {%endfor%}
+
+         </table>
+       </div>
+
+       <div class="col-lg-6">
+
+         <h4>Lista Składników</h4>
+         <a href = "/addproduct"> <h3>dodaj nowy</h3></a>
+         <table class="table table-striped">
+         <tr>
+         <td>nazwa</td> <td>cena</td> <td>waga</td> <td> kaloryczność</td><td>wegański</td><td>wegetariański</td><td> </td>
+         </tr>
+         {%for ingredient in allIngredients%}
+         <tr>
+         <td> {{ingredient.name}} </td>
+         <td> {{ingredient.price}} </td>
+         <td> {{ingredient.weight}} </td>
+         <td> {{ingredient.calories}} </td>
+         <td> {% if ingredient.vegan == 0 %} nie {% else %} tak {%endif%} </td>
+         <td> {% if ingredient.vegetarian == 0 %} nie {% else %} tak {%endif%}  </td>
+         <td> <a href ="/editproduct/{{ingredient.id}}">aktualizuj</a> </td>
+           </tr>
+
+         {%endfor%}
+         </table>
+
+       </div>
+     </div>
+
+     <footer class="footer">
+       <p>&copy; madebykameleon.pl</p>
+     </footer>
+
+   </div> <!-- /container -->
+
+
+
+
+
+
+
+{% endblock %}

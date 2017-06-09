@@ -1,7 +1,18 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Ingredients:Edit{% endblock %}
+{% block title %}AppBundle:Ingredients:Add{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Ingredients:Edit page</h1>
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="jumbotron">
+<div class="alert alert-success" role="alert">
+<strong><h2> edytujesz składnik {{oneIngredient.name}} </h2></strong>
+</div>
+<br>
+{{form_start(form)}}
+{{form_widget(form)}}
+<input type = "submit" value = "aktualizuj">
+{{form_end(form)}}
 {% endblock %}

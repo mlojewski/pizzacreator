@@ -19,19 +19,7 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="surname", type="string", length=255)
-     */
-    private $surname;
+  
 
 
     /**
@@ -48,22 +36,10 @@ class User extends BaseUser
      */
     private $address;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="vegetarian", type="boolean")
-     */
-    private $vegetarian;
+
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="vegan", type="boolean")
-     */
-    private $vegan;
-
-    /**
-    *@ORM\OneToMany(targetEntity = "pizza", mappedBy="creator")
+    *@ORM\OneToMany(targetEntity = "Pizza", mappedBy="creator")
     */
 
     private $pizzas;
@@ -75,58 +51,7 @@ class User extends BaseUser
     }
 
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return User
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
 
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set surname
-     *
-     * @param string $surname
-     * @return User
-     */
-    public function setSurname($surname)
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    /**
-     * Get surname
-     *
-     * @return string 
-     */
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
-    /**
-     * Set phone
-     *
-     * @param integer $phone
-     * @return User
-     */
     public function setPhone($phone)
     {
         $this->phone = $phone;
@@ -137,7 +62,7 @@ class User extends BaseUser
     /**
      * Get phone
      *
-     * @return integer 
+     * @return integer
      */
     public function getPhone()
     {
@@ -160,58 +85,14 @@ class User extends BaseUser
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
         return $this->address;
     }
 
-    /**
-     * Set vegetarian
-     *
-     * @param boolean $vegetarian
-     * @return User
-     */
-    public function setVegetarian($vegetarian)
-    {
-        $this->vegetarian = $vegetarian;
 
-        return $this;
-    }
-
-    /**
-     * Get vegetarian
-     *
-     * @return boolean 
-     */
-    public function getVegetarian()
-    {
-        return $this->vegetarian;
-    }
-
-    /**
-     * Set vegan
-     *
-     * @param boolean $vegan
-     * @return User
-     */
-    public function setVegan($vegan)
-    {
-        $this->vegan = $vegan;
-
-        return $this;
-    }
-
-    /**
-     * Get vegan
-     *
-     * @return boolean 
-     */
-    public function getVegan()
-    {
-        return $this->vegan;
-    }
 
     /**
      * Add pizzas
@@ -239,7 +120,7 @@ class User extends BaseUser
     /**
      * Get pizzas
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPizzas()
     {

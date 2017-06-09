@@ -221,4 +221,37 @@ class Ingredient
     {
         return $this->vegetarian;
     }
+
+    /**
+     * Add pizzas
+     *
+     * @param \AppBundle\Entity\Pizza $pizzas
+     * @return Ingredient
+     */
+    public function addPizza(\AppBundle\Entity\Pizza $pizzas)
+    {
+        $this->pizzas[] = $pizzas;
+
+        return $this;
+    }
+
+    /**
+     * Remove pizzas
+     *
+     * @param \AppBundle\Entity\Pizza $pizzas
+     */
+    public function removePizza(\AppBundle\Entity\Pizza $pizzas)
+    {
+        $this->pizzas->removeElement($pizzas);
+    }
+
+    /**
+     * Get pizzas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPizzas()
+    {
+        return $this->pizzas;
+    }
 }

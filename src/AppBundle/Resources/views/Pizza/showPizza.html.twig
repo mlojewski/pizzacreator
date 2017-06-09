@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Ingredients:Add{% endblock %}
+
+{% block body %}
+
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="jumbotron">
+<h1>PizzaComposer</h1>
+
+<div class="alert alert-success" role="alert">
+<strong><h2> Skomponuj swoją pizzę </h2></strong>
+</div>
+{{form_start(form)}}
+<table class="table table-bordered">
+<tr>
+<td>nazwa</td><td>Waga</td><td>Kalorie</td><td>Cena</td><td>dołóż</td>
+{%for i in ingredients %}
+<tr>
+<td>{{i.name}}</td><td>{{i.weight}}</td><td>{{i.calories}}</td><td>{{i.price}}</td><td>{{form_widget(form.ingredients[i.id])}}</td>
+</tr>
+
+
+{%endfor%}
+
+</table>
+{{form_rest(form)}}
+
+<input type = "submit" value = "zamów">
+{{form_end(form)}}
+<a href = "/logout"><h4>wyloguj się</h4></a>
+</div>
+{% endblock %}
